@@ -1,6 +1,7 @@
 import React from "react";
-import { Header, Wrapper, Logo, NavLink, NavStyled } from "./styled";
+import { Header ,Wrapper, Logo, NavLink, NavStyled } from "./styled";
 import Center from "../center";
+
 
 export default function Navbar() {
   return (

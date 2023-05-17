@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Link from "next/link";
 
 export const Header = styled.header`
-  background-color: #000;
+  background-color: #222;
   padding: 20px;
 `;
 
