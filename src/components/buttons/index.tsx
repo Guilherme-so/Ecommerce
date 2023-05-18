@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
-import { css, styled } from "styled-components";
+import styled, { css } from "styled-components";
 
 interface IButton {
   children: ReactNode;
   size?: string;
   btntype?: string;
-  onClick?: any
+  onClick?: any;
 }
 
 const StyledButton = styled.button<{
@@ -18,6 +18,7 @@ const StyledButton = styled.button<{
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  font-weight: 600;
 
   svg {
     font-size: 16px;
@@ -39,7 +40,7 @@ const StyledButton = styled.button<{
   ${({ btntype }) =>
     btntype === "primary" &&
     css`
-      background-color: #5542f6;
+      background-color: #3483fa;
       color: white;
     `}
     ${({ btntype }) =>
@@ -55,9 +56,18 @@ const StyledButton = styled.button<{
       color: #fff;
       border: 1px solid #fff;
     `}
+    ${({ btntype }) =>
+    btntype === "outline-green" &&
+    css`
+      background-color: #fff;
+      color: #00a650;
+      border: 1px solid #00a650;
+      font-weight: 600;
+      padding: 2px 5px;
+    `}
 `;
 
-export default function Button({ children, size, btntype,onClick }: IButton) {
+export default function Button({ children, size, btntype, onClick }: IButton) {
   return (
     <StyledButton size={size} btntype={btntype} onClick={onClick}>
       {children}
