@@ -1,14 +1,14 @@
 import React, { ReactNode } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 interface ICenter {
   children: ReactNode;
 }
 
 const CenterDiv = styled.div`
-  max-width: 800px;
+  max-width: 900px;
   justify-content: space-between;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 export default function Center({ children }: ICenter) {
