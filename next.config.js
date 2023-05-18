@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
-  // add the following snippet
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
   compiler: {
-    styledComponents: true,
+    styledComponents: {
+      displayName: false,
+      ssr: true,
+    },
   },
 };
 
