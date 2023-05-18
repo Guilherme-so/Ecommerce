@@ -18,27 +18,35 @@ export interface IProduct {
 
 const createScheme = Schema;
 
-const ProductScheme = new createScheme<IProduct>({
-  title: {
-    type: String,
-    required: true,
+const ProductScheme = new createScheme<IProduct>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: String,
+    price: {
+      type: Number,
+      required: true,
+    },
+    images: {
+      type: [String],
+    },
+    category: {
+      type: Types.ObjectId,
+      ref: "Category",
+    },
+    properties: {
+      type: Object,
+    },
   },
-  description: String,
-  price: {
-    type: Number,
-    required: true,
-  },
-  images: {
-    type: [String],
-  },
-  category: {
-    type: Types.ObjectId,
-    ref: "Category",
-  },
-  properties: {
-    type: Object,
-  },
-});
+  {
+    timestamps: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  }
+);
 
 const Product = models.Product || model<IProduct>("Product", ProductScheme);
 
