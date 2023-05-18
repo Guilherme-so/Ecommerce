@@ -1,9 +1,10 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Background = styled.div`
   background-color: #222;
   color: #fff;
   padding: 50px 20px;
+  margin-top: 74px;
 `;
 
 export const Wapper = styled.div`

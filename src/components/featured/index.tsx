@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Background,
   Wapper,
@@ -10,10 +11,13 @@ import {
 import Center from "../center";
 import Button from "../buttons";
 import { ShoppingCartSimple } from "phosphor-react";
-import { useRouter } from "next/router";
 
-export default function Featured({product}) {
-  const router = useRouter()
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/features/cart/cartSlice";
+
+export default function Featured({ product }) {
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <Background>
@@ -22,15 +26,19 @@ export default function Featured({product}) {
           <Column>
             <div>
               <Title>{product.title}</Title>
-              <Description>
-                {product.description}
-              </Description>
+              <Description>{product.description}</Description>
               <ButtonsWrapper>
-                <Button onClick={() => router.push(`/products/${product._id}`)} btntype='outline'>
+                <Button
+                  onClick={() => router.push(`/products/${product._id}`)}
+                  btntype="outline"
+                >
                   Read More
                 </Button>
-                <Button btntype='primary'>
-                  <ShoppingCartSimple weight="fill"/>
+                <Button
+                  onClick={() => dispatch(addToCart(product._id))}
+                  btntype="primary"
+                >
+                  <ShoppingCartSimple weight="fill" />
                   Add to cart
                 </Button>
               </ButtonsWrapper>
