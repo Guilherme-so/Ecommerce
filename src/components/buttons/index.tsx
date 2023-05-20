@@ -6,11 +6,13 @@ interface IButton {
   size?: string;
   btntype?: string;
   onClick?: any;
+  type?: any
 }
 
 const StyledButton = styled.button<{
   size?: string;
   btntype?: string;
+  type?: string
 }>`
   border: 0;
   padding: 5px 15px;
@@ -67,9 +69,9 @@ const StyledButton = styled.button<{
     `}
 `;
 
-export default function Button({ children, size, btntype, onClick }: IButton) {
+export default function Button({ children, size, btntype, onClick, type="button" }: IButton) {
   return (
-    <StyledButton size={size} btntype={btntype} onClick={onClick}>
+    <StyledButton size={size} btntype={btntype} type={type} onClick={onClick}>
       {children}
     </StyledButton>
   );
