@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Cart = styled.div`
   background-color: #fff;
-  height: 400px;
+  min-height: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -27,8 +27,78 @@ export const Cart = styled.div`
     color: #dadada;
     opacity: 0.5;
   }
-
 `;
+
+export const CartWrapper = styled.div`
+  color: #000;
+`;
+
+export const CartProduct = styled.div`
+  margin: 20px 20px 30px 20px;
+  display: flex;
+  gap: 20px;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+} 
+`;
+
+export const ImgContainer = styled.div`
+  margin: 0px 20px;
+`;
+
+export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h4 {
+    opacity: 0.8;
+  }
+
+  button {
+    border: none;
+    background-color: unset;
+    font-weight: 600;
+    color: #5585fa;
+    cursor: pointer;
+  }
+`;
+
+
+export const Quantity = styled.div`
+  display: flex;
+  border: 1px solid #dadada;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  height: 30px;
+  width: 120px;
+  border-radius: 5px;
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: unset;
+    font-size: 1.3rem;
+    color: #5585fa;
+    cursor: pointer;
+  }
+`;
+
+export const Price = styled.div`
+
+span {
+  font-size: 1.3rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+`
+
 
 export const Compra = styled.div`
   background-color: #fff;

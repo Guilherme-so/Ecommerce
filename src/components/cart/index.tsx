@@ -1,14 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import {
+  addToCart,
+  removeALlEgualProduct,
+  removeOneToCart,
+} from "@/redux/features/cart/cartSlice";
 import CartEmpty from "./cartEmpty/cartEmpty";
-import { Cart, Compra, CompraInfo, Container } from "./styled";
+import {
+  Container,
+  Cart,
+  CartWrapper,
+  CartProduct,
+  Compra,
+  CompraInfo,
+  ImgContainer,
+  Description,
+  Quantity,
+  Price,
+} from "./styled";
 import Button from "../buttons";
 
 export default function CartItens() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.value);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      const getCartProducts = async () => {
+        const data = {
+          ids: cart,
+        };
+        const response = await axios.post("/api/cart", data);
+        setProducts(response.data);
+      };
+      getCartProducts();
+    } else {
+      setProducts([]);
+    }
+  }, [cart]);
+
+  let calcCartPrice = 0;
+  for (const productId of cart) {
+    const price = products.find((p) => p._id === productId)?.price || 0;
+    calcCartPrice += price;
+  }
 
   return (
     <>
@@ -19,6 +60,53 @@ export default function CartItens() {
           <Cart>
             <h2>Produtos</h2>
             <hr />
+            {products?.map((product) => (
+              <CartWrapper key={product._id}>
+                <CartProduct>
+                  <ImgContainer>
+                    <Image
+                      src={product.images[0]}
+                      alt={product.title}
+                      height={55}
+                      width={45}
+                    />
+                  </ImgContainer>
+                  <div className="wrapper">
+                    <Description>
+                      <h4>{product.title}</h4>
+                      <div>
+                        <button
+                          onClick={() =>
+                            dispatch(removeALlEgualProduct(product._id))
+                          }
+                        >
+                          Excluir
+                        </button>
+                      </div>
+                    </Description>
+
+                    <Quantity>
+                      <button
+                        onClick={() => dispatch(removeOneToCart(product._id))}
+                      >
+                        -
+                      </button>
+                      <span>
+                        {cart.filter((id) => id === product._id).length}
+                      </span>
+                      <button onClick={() => dispatch(addToCart(product._id))}>
+                        +
+                      </button>
+                    </Quantity>
+
+                    <Price>
+                      <span>R$ {product.price}</span>
+                    </Price>
+                  </div>
+                </CartProduct>
+                <hr />
+              </CartWrapper>
+            ))}
           </Cart>
 
           <Compra>
@@ -26,7 +114,17 @@ export default function CartItens() {
             <hr />
             <CompraInfo>
               <div className="produto">
-                <p>Produto</p> <span>R$ 600</span>
+                <p>
+                  {products?.length === 1
+                    ? "Produto"
+                    : `Produtos (${products?.length})`}
+                </p>
+                <span>
+                  {calcCartPrice.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </span>
               </div>
               <div className="frete">
                 <p>Frete</p> <span>Grátis</span>
@@ -34,10 +132,20 @@ export default function CartItens() {
               <span className="cupom">Inserir código do cupom</span>
               <div className="total">
                 <span>Total</span>
-                <span>R$ 600</span>
+                <span>
+                  R${" "}
+                  {calcCartPrice.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </span>
               </div>
               <div className="compra">
-                <Button size="large" btntype="primary">
+                <Button
+                  onClick={() => router.push("/checkout")}
+                  size="large"
+                  btntype="primary"
+                >
                   Continuar a compra
                 </Button>
               </div>
