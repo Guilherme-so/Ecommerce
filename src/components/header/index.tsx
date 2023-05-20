@@ -12,7 +12,7 @@ export default function Navbar() {
     <Container>
       <Center>
         <Wrapper>
-          <Logo href="/">Gui-commerce</Logo>
+          <Logo href="/">ARGO</Logo>
           <NavStyled>
             <NavLink href="/">Home</NavLink>
             <NavLink href="/products">All Products</NavLink>

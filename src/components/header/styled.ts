@@ -19,6 +19,7 @@ export const Logo = styled(Link)`
   color: #474637;
   text-decoration: none;
   font-size: large;
+  font-weight: 600;
 `;
 
 export const NavStyled = styled.nav`
