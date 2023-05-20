@@ -170,3 +170,51 @@ export const Total = styled.div`
   justify-content: space-between;
   opacity: 0.8;
 `;
+
+export const Success = styled.div`
+  background-color: #eeeeee;
+  color: #000;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 30px;
+  gap: 30px;
+  height: 500px;
+`;
+
+export const SuccessWrapper = styled.div`
+  background-color: #f5f5f5;
+  padding: 40px 70px;
+  border-radius: 6px;
+  display: flex;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .iconWrapper {
+    height: 90px;
+    width: 90px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    opacity: .7;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 160px;
+  margin-top: 10px;
+  }
+`;

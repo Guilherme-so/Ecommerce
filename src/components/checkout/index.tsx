@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import {
   Background,
@@ -10,13 +12,17 @@ import {
   Frete,
   Produtos,
   Total,
+  Success,
+  SuccessWrapper,
 } from "./styled";
-import axios from "axios";
 import FormularioEndereco from "../formularioEndereco";
-import { MapPinLine } from "phosphor-react";
+import { CheckCircle, MapPinLine } from "phosphor-react";
 import Button from "../buttons";
+import { removeALl } from "@/redux/features/cart/cartSlice";
 
 export default function CheckoutProduct() {
+  const router = useRouter()
+  const dispatch = useDispatch()
   const cart = useSelector((state: RootState) => state.cart.value);
   const address = useSelector((state: RootState) => state.address.value);
   const [products, setProducts] = useState([]);
@@ -43,6 +49,42 @@ export default function CheckoutProduct() {
     calcCartPrice += price;
   }
 
+  const handleCheckoutPayment = async () => {
+    const data = {
+      address,
+      cart,
+    };
+
+    const resp = await axios.post("/api/checkout", data);
+    if (resp.data.url) {
+      window.location = resp.data.url;
+    }
+  };
+
+  if (window.location.href.includes("success")) {
+    useEffect(()=> {
+      dispatch(removeALl())
+    }, [])
+
+    return (
+      <Success>
+        <SuccessWrapper>
+          <div className="iconWrapper">
+            <CheckCircle size={60} color="#3483fa" />
+          </div>
+          <div className="infoWrapper">
+            <div>
+              <h3>Compra efetuado com sucesso!</h3>
+            </div>
+          </div>
+          <Button 
+          onClick={()=> router.push('/')}
+          btntype="primary">Home Page</Button>
+        </SuccessWrapper>
+      </Success>
+    );
+  }
+
   return (
     <Background>
       <Entrega>
@@ -64,7 +106,7 @@ export default function CheckoutProduct() {
                     {address.cidade}, {address.estado} - CEP {address.cep}
                   </p>
                   <p>
-                    {address.nome} - {address.telefone}
+                    {address.nome} - {address.email}
                   </p>
                 </div>
                 <div className="edit" onClick={() => setEditar(true)}>
@@ -73,7 +115,9 @@ export default function CheckoutProduct() {
               </div>
             </EnderecoFilled>
             <div className="continuar">
-              <Button btntype="primary">Continuar</Button>
+              <Button onClick={handleCheckoutPayment} btntype="primary">
+                Continuar
+              </Button>
             </div>
           </div>
         ) : Object.keys(address).length > 0 && editar === true ? (
