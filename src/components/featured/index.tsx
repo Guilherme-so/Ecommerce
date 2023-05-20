@@ -45,7 +45,7 @@ export default function Featured({ product }) {
             </div>
           </Column>
           <Column>
-            <img src={product.images[3]} alt={product.title} />
+            <img src={product.images[1]} alt={product.title} />
           </Column>
         </Wapper>
       </Center>
