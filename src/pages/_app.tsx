@@ -1,16 +1,20 @@
 import { GlobalStyles } from "@/styles/globals.styled";
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
 import Navbar from "@/components/header";
+
+import { Provider } from "react-redux";
+import { store, persistor } from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Provider store={store}>
-        <Navbar/>
-        <GlobalStyles />
-        <Component {...pageProps} />
+        <PersistGate loading={null} persistor={persistor}>
+          <Navbar />
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </PersistGate>
       </Provider>
     </>
   );
