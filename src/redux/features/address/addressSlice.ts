@@ -10,7 +10,7 @@ export interface AddressState {
     rua?: string;
     numero?: string;
     complemento?: string;
-    telefone?: string;
+    email?: string;
   };
 }
 
