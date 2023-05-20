@@ -19,7 +19,7 @@ export default function FormularioEndereco({setEditar}) {
   const [rua, setRua] = useState(address.rua || "");
   const [numero, setNumero] = useState(address.numero || "");
   const [complemento, setComplemento] = useState(address.complemento || "");
-  const [telefone, setTelefone] = useState(address.telefone || "");
+  const [email, setEmail] = useState(address.email || "");
 
   async function findMyCep(cep) {
     const res = await buscaCep(cep);
@@ -43,7 +43,7 @@ export default function FormularioEndereco({setEditar}) {
         rua,
         numero,
         complemento,
-        telefone,
+        email,
       })
     );
     setEditar(false)
@@ -135,12 +135,12 @@ export default function FormularioEndereco({setEditar}) {
         onChange={(e) => setComplemento(e.target.value)}
       />
 
-      <label htmlFor="telefone">Telefone de contato</label>
+      <label htmlFor="email">email de contato</label>
       <Input
-        id="telefone"
+        id="email"
         size="small"
-        value={telefone}
-        onChange={(e) => setTelefone(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         required={true}
       />
 
