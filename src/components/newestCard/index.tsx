@@ -43,12 +43,12 @@ export default function Cardbox({ product }) {
       <CardFooter>
         <PriceInfo>
           <span onClick={goToProduct}>R$ {product.price}</span>
-          <Button
+          {/* <Button
             onClick={() => dispatch(addToCart(product._id))}
             btntype="outline-green"
           >
             Add to cart
-          </Button>
+          </Button> */}
         </PriceInfo>
         <ParcelaInfo>
           <span className="first">10x R$ {product.price} sem juros</span>
