@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./features/cart/cartSlice";
 import addressSlice from "./features/address/addressSlice";
+import favoritesReducer from "./features/favorites/favoritesSlice";
 
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -15,14 +16,23 @@ const persistAddressConfig = {
   key: "address",
   storage,
 };
+const persistFavConfig = {
+  key: "fav",
+  storage,
+};
 
 const persistedCartReducer = persistReducer(persistCartConfig, cartReducer);
-const persistedAddressReducer = persistReducer(persistAddressConfig, addressSlice);
+const persistedAddressReducer = persistReducer(
+  persistAddressConfig,
+  addressSlice
+);
+const persistedFavReducer = persistReducer(persistFavConfig, favoritesReducer);
 
 export const store = configureStore({
   reducer: {
     cart: persistedCartReducer,
     address: persistedAddressReducer,
+    favorites: persistedFavReducer,
   },
   middleware: [thunk],
 });
