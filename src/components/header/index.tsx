@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
+import { removeToFavorites } from "@/redux/features/favorites/favoritesSlice";
 import Center from "../center";
-import { Handbag } from "phosphor-react";
+import { Handbag, MagnifyingGlass } from "phosphor-react";
 import ChevronRight from "../icons/chevronRight";
+import Button from "../buttons";
 import {
   Container,
   Wrapper,
@@ -15,41 +18,153 @@ import {
   ImageContainer,
   Info,
   VerTodos,
+  TopHeader,
 } from "./styled";
-import Image from "next/image";
-import Button from "../buttons";
-import { removeToFavorites } from "@/redux/features/favorites/favoritesSlice";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.value);
   const favorites = useSelector((state: RootState) => state.favorites.value);
-  const dispatch = useDispatch();
+  const address = useSelector((state: RootState) => state.address.value);
   const [openFavoritos, setOpenFavoritos] = useState(false);
-  const [products, setProducts] = useState([]);
-
-  console.log(products);
+  const [openCategories, setOpenCategories] = useState(false);
+  const [favProducts, setFavProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [produtos, setProdutos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [searchList, setSearchList] = useState([]);
+  const [isSearchOpen, setSearchopen] = useState(false);
 
   const fetchFavorites = async () => {
     const data = {
       favorites: favorites ?? favorites,
     };
     const resp = await axios.post("/api/favorites", data);
-    setProducts(resp.data);
+    setFavProducts(resp.data);
   };
 
   useEffect(() => {
     fetchFavorites();
   }, [favorites]);
 
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      const resp = await axios.get("/api/produtos");
+      setProdutos(resp.data);
+    };
+    const fetchCategories = async () => {
+      const resp = await axios.get("/api/categorias");
+      setCategorias(resp.data);
+    };
+    fetchCategories();
+    fetchProdutos();
+  }, []);
+  console.log(categorias);
+
+  function searchItems(title: string) {
+    const regex = new RegExp(searchValue, "i");
+    return regex.test(title);
+  }
+
+  useEffect(() => {
+    const novaLista = produtos.filter((item) => searchItems(item.title));
+    setSearchList(novaLista);
+  }, [searchValue]);
+
+  //onBlur styled components
+  const searchRef = useRef<HTMLDivElement>();
+
+  useEffect(() => {
+    const externalEventHandler = (e: any) => {
+      if (!isSearchOpen) return;
+      const node = searchRef.current;
+      if (node && node.contains(e.target)) {
+        return;
+      }
+      setSearchopen(false);
+    };
+
+    if (isSearchOpen) {
+      document.addEventListener("click", externalEventHandler);
+    } else {
+      document.removeEventListener("click", externalEventHandler);
+    }
+    return () => {
+      document.removeEventListener("click", externalEventHandler);
+    };
+  }, [isSearchOpen]);
+
   return (
     <Container>
       <Center>
+        <TopHeader>
+          <Logo href={"/"}>ARGO</Logo>
+          <div
+            className="search"
+            ref={searchRef}
+            onClick={() => {
+              setSearchopen(true);
+            }}
+          >
+            <input
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+              type="text"
+              placeholder="Buscar produtos"
+            />
+            <MagnifyingGlass className="icon" size={20} />
+
+            <div
+              style={isSearchOpen ? { display: "flex" } : {}}
+              className="result"
+            >
+              {searchList?.map((prod) => (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/product/${prod._id}`);
+                  }}
+                  className="resultItem"
+                >
+                  <MagnifyingGlass size={20} />
+                  <p>{prod.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div></div>
+        </TopHeader>
+
         <Wrapper>
-          <Logo href="/">ARGO</Logo>
+          <NavStyled>
+            <NavLink
+              href="/categories"
+              onMouseMove={() => setOpenCategories(true)}
+            >
+              Categories
+              <span>
+                <ChevronRight />
+              </span>
+              {openCategories && (
+                <div
+                  className="categories"
+                  onMouseLeave={() => setOpenCategories(false)}
+                >
+                  <span className="carot"></span>
+                  {categorias?.map((categoria) => (
+                    <h3>{categoria.name}</h3>
+                  ))}
+                </div>
+              )}
+            </NavLink>
+          </NavStyled>
           <NavStyled>
             <NavLink href="/account">Account</NavLink>
-            <NavLink href="/products">All Products</NavLink>
-            <NavLink href="/categories">Categories</NavLink>
+            <NavLink href="/compras">Compras</NavLink>
             <NavLink href="#" onMouseMove={() => setOpenFavoritos(true)}>
               Favoritos
               <span>
@@ -64,7 +179,7 @@ export default function Navbar() {
                   <h2>Favoritos</h2>
                   <hr />
                   <div className="test">
-                    {products?.map((product) => (
+                    {favProducts?.map((product) => (
                       <Products key={product._id}>
                         <ImageContainer>
                           <Image
@@ -115,11 +230,6 @@ export default function Navbar() {
                       </Products>
                     ))}
                   </div>
-                  {products.length > 0 && (
-                    <VerTodos>
-                      <h3>Ver todos</h3>
-                    </VerTodos>
-                  )}
                 </div>
               )}
             </NavLink>
