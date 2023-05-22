@@ -42,9 +42,9 @@ export const CardFooter = styled.div`
 
 export const PriceInfo = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
   margin-top: 3px;
+  margin-left: 7px;
 
   span {
     font-size: 1.3rem;
