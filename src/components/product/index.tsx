@@ -59,6 +59,10 @@ export default function ProductById({ product, category, parentCategory }) {
     }
   }, [favorites]);
 
+  useEffect(()=> {
+    setBigImage(product.images[0])
+  },[product])
+
   return (
     <Container>
       <Breadcrumbs>
@@ -92,10 +96,7 @@ export default function ProductById({ product, category, parentCategory }) {
         </ImagesContainer>
         <InfoContainer>
           <LeftSide>
-            <Like
-              className="like"
-              onClick={() => dispatch(addToFavorites(product._id))}
-            >
+            <Like className="like">
               {isLiked ? (
                 <Heart
                   onClick={() => {
@@ -106,7 +107,11 @@ export default function ProductById({ product, category, parentCategory }) {
                   color="#3483fa"
                 />
               ) : (
-                <Heart color="#3483fa" size={32} />
+                <Heart
+                  onClick={() => dispatch(addToFavorites(product._id))}
+                  color="#3483fa"
+                  size={32}
+                />
               )}
             </Like>
             <h1>{product.title}</h1>

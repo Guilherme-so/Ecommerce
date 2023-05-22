@@ -6,7 +6,7 @@ interface ICenter {
 }
 
 const CenterDiv = styled.div`
-  max-width: 900px;
+  max-width: 80%;
   justify-content: space-between;
   margin: 0 auto;
 `;

@@ -11,6 +11,8 @@ export const Wapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  height: 300px;
+
   img {
     max-width: 100%;
     max-height: 400px;
