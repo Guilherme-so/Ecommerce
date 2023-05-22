@@ -21,8 +21,8 @@ import Button from "../buttons";
 import { removeALl } from "@/redux/features/cart/cartSlice";
 
 export default function CheckoutProduct() {
-  const router = useRouter()
-  const dispatch = useDispatch()
+  const router = useRouter();
+  const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.value);
   const address = useSelector((state: RootState) => state.address.value);
   const [products, setProducts] = useState([]);
@@ -62,9 +62,7 @@ export default function CheckoutProduct() {
   };
 
   if (window.location.href.includes("success")) {
-    useEffect(()=> {
-      dispatch(removeALl())
-    }, [])
+    dispatch(removeALl());
 
     return (
       <Success>
@@ -77,9 +75,9 @@ export default function CheckoutProduct() {
               <h3>Compra efetuado com sucesso!</h3>
             </div>
           </div>
-          <Button 
-          onClick={()=> router.push('/')}
-          btntype="primary">Home Page</Button>
+          <Button onClick={() => router.push("/")} btntype="primary">
+            Home Page
+          </Button>
         </SuccessWrapper>
       </Success>
     );
