@@ -6,13 +6,13 @@ interface IButton {
   size?: string;
   btntype?: string;
   onClick?: any;
-  type?: any
+  type?: any;
 }
 
 const StyledButton = styled.button<{
   size?: string;
   btntype?: string;
-  type?: string
+  type?: string;
 }>`
   border: 0;
   padding: 5px 15px;
@@ -45,6 +45,12 @@ const StyledButton = styled.button<{
       background-color: #3483fa;
       color: white;
     `}
+  ${({ btntype }) =>
+    btntype === "secondary" &&
+    css`
+      background-color: #dde4f9;
+      color: #6A8BF5;
+    `}
     ${({ btntype }) =>
     btntype === "white" &&
     css`
@@ -59,6 +65,13 @@ const StyledButton = styled.button<{
       border: 1px solid #fff;
     `}
     ${({ btntype }) =>
+    btntype === "outline-white" &&
+    css`
+      background-color: #fff;
+      color: black;
+      border: 1px solid black;
+    `}
+    ${({ btntype }) =>
     btntype === "outline-green" &&
     css`
       background-color: #fff;
@@ -69,7 +82,13 @@ const StyledButton = styled.button<{
     `}
 `;
 
-export default function Button({ children, size, btntype, onClick, type="button" }: IButton) {
+export default function Button({
+  children,
+  size,
+  btntype,
+  onClick,
+  type = "button",
+}: IButton) {
   return (
     <StyledButton size={size} btntype={btntype} type={type} onClick={onClick}>
       {children}
