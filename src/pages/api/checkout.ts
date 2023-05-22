@@ -8,10 +8,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    res.json({ Message: "The API only accepts POST Request" });
-  }
   await mongooseConnect();
+
+  if (req.method !== "POST") {
+    res.json({ Message: "This API only accepts POST request" });
+  }
 
   const { address, cart } = req.body;
   const { nome, cep, estado, cidade, bairro, rua, numero, complemento, email } =
@@ -30,7 +31,12 @@ export default async function handler(
         quantity,
         price_data: {
           currency: "USD",
-          product_data: { name: productInfo.title },
+          product_data: {
+            _id: productInfo._id,
+            name: productInfo.title,
+            images: productInfo.images,
+            description: productInfo.description
+          },
           unit_amount: quantity * productInfo.price * 100,
         },
       });
