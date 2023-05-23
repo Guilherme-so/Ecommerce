@@ -49,7 +49,13 @@ const StyledButton = styled.button<{
     btntype === "secondary" &&
     css`
       background-color: #dde4f9;
-      color: #6A8BF5;
+      color: #6a8bf5;
+    `}
+    ${({ btntype }) =>
+    btntype === "yellow" &&
+    css`
+      background-color: #FEE456;
+      color: #000;
     `}
     ${({ btntype }) =>
     btntype === "white" &&

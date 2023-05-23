@@ -29,14 +29,16 @@ export default function Featured({ product }) {
               <Description>{product.description}</Description>
               <ButtonsWrapper>
                 <Button
-                  onClick={() => router.push(`/products/${product._id}`)}
+                  onClick={() => router.push(`/product/${product._id}`)}
                   btntype="outline"
+                  size="large"
                 >
                   Read More
                 </Button>
                 <Button
                   onClick={() => dispatch(addToCart(product._id))}
-                  btntype="primary"
+                  btntype="yellow"
+                  size="large"
                 >
                   <ShoppingCartSimple weight="fill" />
                   Add to cart
