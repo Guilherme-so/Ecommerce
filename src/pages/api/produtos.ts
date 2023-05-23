@@ -8,7 +8,18 @@ export default async function handler(
 ) {
   await mongooseConnect();
   if (req.method === "GET") {
-    const produtos = await Product.find();
-    res.json(produtos);
+    const { category } = req.query;
+    if (category) {
+      const produtos = await Product.find().populate({
+        path: "category",
+      });
+      const filteredProducts = produtos.filter(
+        (prod) => prod.category.name === category
+      );
+      res.json(filteredProducts);
+    } else {
+      const produtos = await Product.find();
+      res.json(produtos);
+    }
   }
 }

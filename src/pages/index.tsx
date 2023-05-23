@@ -3,12 +3,14 @@ import Featured from "@/components/featured";
 import { mongooseConnect } from "@/lib/mongoose";
 import Product from "@/models/product";
 import NewestProducts from "@/components/newestProducts";
+import Footer from "@/components/footer";
 
 export default function Home({ featuredProduct, newestProducts }) {
   return (
     <>
       <Featured product={featuredProduct} />
       <NewestProducts newest={newestProducts} />
+      <Footer />
     </>
   );
 }
