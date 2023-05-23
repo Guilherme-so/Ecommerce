@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 40px;
-  margin-top: 94px;
+  margin-top: 114px;
+  height: 80vh;
 `;
 
 export const Breadcrumbs = styled.div`
