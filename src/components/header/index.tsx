@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ import {
   Info,
   VerTodos,
   TopHeader,
+  ButtonLink,
 } from "./styled";
 import { useRouter } from "next/router";
 
@@ -37,17 +38,17 @@ export default function Navbar() {
   const [searchList, setSearchList] = useState([]);
   const [isSearchOpen, setSearchopen] = useState(false);
 
-  const fetchFavorites = async () => {
+  const fetchFavorites = useCallback(async () => {
     const data = {
       favorites: favorites ?? favorites,
     };
     const resp = await axios.post("/api/favorites", data);
     setFavProducts(resp.data);
-  };
+  }, [favorites]);
 
   useEffect(() => {
     fetchFavorites();
-  }, [favorites]);
+  }, [favorites, fetchFavorites]);
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -61,17 +62,16 @@ export default function Navbar() {
     fetchCategories();
     fetchProdutos();
   }, []);
-  console.log(categorias);
 
-  function searchItems(title: string) {
+  const searchItems = useCallback((title: string) => {
     const regex = new RegExp(searchValue, "i");
     return regex.test(title);
-  }
+  }, [searchValue]);
 
   useEffect(() => {
     const novaLista = produtos.filter((item) => searchItems(item.title));
     setSearchList(novaLista);
-  }, [searchValue]);
+  }, [searchValue, produtos, searchItems]);
 
   //onBlur styled components
   const searchRef = useRef<HTMLDivElement>();
@@ -100,7 +100,7 @@ export default function Navbar() {
     <Container>
       <Center>
         <TopHeader>
-          <Logo href={"/"}>ARGO</Logo>
+          <Logo href={"/"}>Ecommerce</Logo>
           <div
             className="search"
             ref={searchRef}
@@ -124,6 +124,7 @@ export default function Navbar() {
             >
               {searchList?.map((prod) => (
                 <div
+                  key={prod._id}
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/product/${prod._id}`);
@@ -141,10 +142,7 @@ export default function Navbar() {
 
         <Wrapper>
           <NavStyled>
-            <NavLink
-              href="/categories"
-              onMouseMove={() => setOpenCategories(true)}
-            >
+            <ButtonLink onMouseMove={() => setOpenCategories(true)}>
               Categories
               <span>
                 <ChevronRight />
@@ -156,11 +154,19 @@ export default function Navbar() {
                 >
                   <span className="carot"></span>
                   {categorias?.map((categoria) => (
-                    <h3>{categoria.name}</h3>
+                    <h3
+                      onClick={() => {
+                        router.push(`/category/${categoria.name}`);
+                        setOpenCategories(false);
+                      }}
+                      key={categoria._id}
+                    >
+                      {categoria.name}
+                    </h3>
                   ))}
                 </div>
               )}
-            </NavLink>
+            </ButtonLink>
           </NavStyled>
           <NavStyled>
             <NavLink href="/account">Account</NavLink>

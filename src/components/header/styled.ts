@@ -134,7 +134,7 @@ export const NavStyled = styled.nav`
   align-items: center;
 `;
 
-export const NavLink = styled(Link)<{ cartlength?: boolean }>`
+export const ButtonLink = styled.div<{ cartlength?: boolean }>`
   position: relative;
   text-decoration: none;
   color: #474637;
@@ -148,19 +148,6 @@ export const NavLink = styled(Link)<{ cartlength?: boolean }>`
       translate: 2px 4px;
       rotate: 90deg;
     }
-  }
-
-  .cart {
-    translate: 0px -2px;
-  }
-
-  .count {
-    position: absolute;
-    top: 8px;
-    left: ${({ cartlength }) => (cartlength ? "9px" : "12px")};
-    color: #474637;
-    font-size: x-small;
-    font-weight: bold;
   }
   .categories {
     position: absolute;
@@ -192,6 +179,37 @@ export const NavLink = styled(Link)<{ cartlength?: boolean }>`
         background-color: #3983F5;
       }
     }
+  }
+
+`
+
+export const NavLink = styled(Link)<{ cartlength?: boolean }>`
+  position: relative;
+  text-decoration: none;
+  color: #474637;
+  position: relative;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+
+  span {
+    svg {
+      translate: 2px 4px;
+      rotate: 90deg;
+    }
+  }
+
+  .cart {
+    translate: 0px -2px;
+  }
+
+  .count {
+    position: absolute;
+    top: 8px;
+    left: ${({ cartlength }) => (cartlength ? "9px" : "12px")};
+    color: #474637;
+    font-size: x-small;
+    font-weight: bold;
   }
 
   .favoritos {
