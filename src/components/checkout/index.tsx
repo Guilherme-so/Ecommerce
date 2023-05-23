@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,9 +61,13 @@ export default function CheckoutProduct() {
     }
   };
 
-  if (window.location.href.includes("success")) {
-    dispatch(removeALl());
+  useEffect(() => {
+    if (window.location.href.includes("success")) {
+      dispatch(removeALl());
+    }
+  }, [dispatch]);
 
+  if (window.location.href.includes("success")) {
     return (
       <Success>
         <SuccessWrapper>
