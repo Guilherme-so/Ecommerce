@@ -14,19 +14,27 @@ export interface IPedido {
   paid: boolean;
 }
 
-const PedidoSchema = new Schema({
-  line_items: Object,
-  nome: String,
-  cep: String,
-  estado: String,
-  cidade: String,
-  bairro: String,
-  rua: String,
-  numero: String,
-  complemento: String,
-  email: String,
-  paid: Boolean,
-});
+const PedidoSchema = new Schema(
+  {
+    line_items: Object,
+    nome: String,
+    cep: String,
+    estado: String,
+    cidade: String,
+    bairro: String,
+    rua: String,
+    numero: String,
+    complemento: String,
+    email: String,
+    paid: Boolean,
+  },
+  {
+    timestamps: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  }
+);
 
 const Pedido = models.Pedido || model<IPedido>("Pedido", PedidoSchema);
 
