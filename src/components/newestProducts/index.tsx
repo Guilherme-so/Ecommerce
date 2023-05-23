@@ -16,7 +16,7 @@ export default function NewestProducts({ newest }) {
     if (asPath === "/#products") {
       executeScroll();
     }
-  }, []);
+  }, [asPath]);
 
   return (
     <Center>

@@ -36,7 +36,7 @@ export default function Cardbox({ product }) {
     } else {
       setIsLiked(false);
     }
-  }, [favorites]);
+  }, [favorites, product._id]);
 
   return (
     <Card>
