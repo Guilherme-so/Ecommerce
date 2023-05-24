@@ -24,7 +24,7 @@ export default function Featured({ product }) {
       <Center>
         <Wapper>
           <Column>
-            <div>
+            <div className="main">
               <Title>{product.title}</Title>
               <Description>{product.description}</Description>
               <ButtonsWrapper>
@@ -46,7 +46,7 @@ export default function Featured({ product }) {
               </ButtonsWrapper>
             </div>
           </Column>
-          <Column>
+          <Column className="img">
             <img src={product.images[1]} alt={product.title} />
           </Column>
         </Wapper>
