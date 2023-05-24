@@ -9,6 +9,11 @@ export const Background = styled.div`
   grid-template-columns: 1fr 450px;
   gap: 30px;
   height: 100vh;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+    padding: 0px 10px;
+  }
 `;
 
 export const Entrega = styled.div`
@@ -32,6 +37,15 @@ export const Entrega = styled.div`
     height: 45px;
     width: 150px;
     margin-top: 30px;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 10px 0px;
+
+    h2 {
+      opacity: 0.6;
+      margin-bottom: 20px;
+    }
   }
 `;
 
@@ -79,7 +93,18 @@ export const EnderecoFilled = styled.div`
     font-size: small;
     margin-bottom: 3px;
   }
+
+  @media screen and (max-width: 700px) {
+    padding: 20px;
+    gap: 20px;
+
+    .iconWrapper {
+      height: 50px;
+      width: 60px;
+    }
+  }
 `;
+
 export const EnderecoFill = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
@@ -134,6 +159,31 @@ export const EnderecoFill = styled.div`
     font-size: small;
     margin-bottom: 3px;
   }
+
+  @media screen and (max-width: 700px) {
+    .iconWrapper {
+      height: 50px;
+      width: 60px;
+    }
+
+    .edit > button {
+      height: 40px;
+      max-width: 100px;
+      width: 100%;
+    }
+
+    h2 {
+      font-size: medium;
+    }
+
+    h3 {
+      font-size: small;
+    }
+
+    p {
+      font-size: small;
+    }
+  }
 `;
 
 export const Checkout = styled.div`
@@ -149,6 +199,10 @@ export const Checkout = styled.div`
     color: #dadada;
     opacity: 0.5;
     margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 700px) {
+    padding: 40px 20px 30px 20px;
   }
 `;
 
@@ -206,7 +260,7 @@ export const SuccessWrapper = styled.div`
 
   h3 {
     font-size: 1.8rem;
-    opacity: .7;
+    opacity: 0.7;
   }
 
   button {
@@ -215,6 +269,6 @@ export const SuccessWrapper = styled.div`
     justify-content: center;
     height: 40px;
     width: 160px;
-  margin-top: 10px;
+    margin-top: 10px;
   }
 `;

@@ -112,7 +112,7 @@ export default function CheckoutProduct() {
                   </p>
                 </div>
                 <div className="edit" onClick={() => setEditar(true)}>
-                  <p>Editar ou escolher outro</p>
+                  <p>Editar</p>
                 </div>
               </div>
             </EnderecoFilled>
