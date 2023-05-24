@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -25,11 +26,13 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
+    "strapi-plugin-vercel-deploy": "^1.4.0",
     "stripe": "^12.6.0",
     "styled-components": "5.3.10",
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "stripe-cli": "^0.1.0"
   }
 }
