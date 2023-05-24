@@ -7,6 +7,10 @@ export const Container = styled.div`
   color: #fff;
   margin: 40px;
   margin-top: 114px;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const EmptyCart = styled.div`

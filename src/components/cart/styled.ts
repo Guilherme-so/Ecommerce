@@ -7,6 +7,12 @@ export const Container = styled.div`
   color: #fff;
   margin: 40px;
   margin-top: 114px;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+    margin: 20px;
+    margin-top: 94px;
+  }
 `;
 
 export const Cart = styled.div`
@@ -27,6 +33,16 @@ export const Cart = styled.div`
     color: #dadada;
     opacity: 0.5;
   }
+
+  @media screen and (max-width: 700px) {
+    min-height: 250px;
+
+    h2 {
+      opacity: 0.7;
+      margin: 15px 30px;
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const CartWrapper = styled.div`
@@ -42,11 +58,25 @@ export const CartProduct = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-} 
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 10px 10px 20px 10px;
+    gap: 10px;
+
+    .wrapper {
+      flex-direction: column;
+
+    }
+  }
 `;
 
 export const ImgContainer = styled.div`
   margin: 0px 20px;
+
+  @media screen and (max-width: 700px) {
+    margin: 0px 10px;
+  }
 `;
 
 export const Description = styled.div`
@@ -65,8 +95,15 @@ export const Description = styled.div`
     color: #5585fa;
     cursor: pointer;
   }
-`;
 
+  @media screen and (max-width: 700px) {
+    gap: 10px;
+
+    h4 {
+      font-size: small;
+    }
+  }
+`;
 
 export const Quantity = styled.div`
   display: flex;
@@ -87,18 +124,35 @@ export const Quantity = styled.div`
     color: #5585fa;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 700px) {
+    padding: 5px;
+    width: 100px;
+    border-radius: 5px;
+
+    button {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 export const Price = styled.div`
+  span {
+    font-size: 1.3rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
 
-span {
-  font-size: 1.3rem;
-  font-weight: 400;
-  opacity: 0.9;
-}
-
-`
-
+  @media screen and (max-width: 700px) {
+    display: flex;
+    margin-left: auto;
+    translate: 0px 15px;
+    span {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+  }
+`;
 
 export const Compra = styled.div`
   background-color: #fff;
@@ -115,6 +169,13 @@ export const Compra = styled.div`
   hr {
     color: #dadada;
     opacity: 0.5;
+  }
+
+  @media screen and (max-width: 700px) {
+    h2 {
+      margin: 15px 30px;
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -158,6 +219,7 @@ export const CompraInfo = styled.div`
     color: #3483fa;
     font-weight: 600;
   }
+
   .total {
     color: #000;
     display: flex;
@@ -173,10 +235,18 @@ export const CompraInfo = styled.div`
       font-weight: 600;
     }
   }
+
   .compra {
     margin-top: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 700px) {
+      button {
+        height: 40px;
+        font-size: medium;
+      }
+    }
   }
 `;
