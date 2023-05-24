@@ -10,6 +10,12 @@ export const Card = styled.div`
   flex-direction: column;
   border-radius: 5px;
 
+  @media screen and (max-width: 700px) {
+    max-width: 200px;
+    width: 100%;
+    height: 250px;
+  }
+
   :hover {
     .title {
       display: flex;
@@ -27,13 +33,25 @@ export const Card = styled.div`
 
 export const ImageWrapper = styled.div`
   background-color: white;
+  position: relative;
   overflow: hidden;
-  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 20px auto;
   border-bottom: 1px solid #c4baba;
   cursor: pointer;
+  max-height: 200px;
+  height: 100%;
+  max-width: 200px;
+  width: 100%;
+
+    @media screen and (max-width: 600px) {
+    max-width: 200px;
+    width: 100%;
+    margin: 10px auto;
+
+  }
 `;
 
 export const CardFooter = styled.div`

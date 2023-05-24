@@ -62,8 +62,8 @@ export default function Cardbox({ product }) {
         <Image
           src={product.images[0]}
           alt={product.title}
-          height={200}
-          width={200}
+          fill
+          style={{objectFit:'contain'}}
         />
       </ImageWrapper>
       <CardFooter>
