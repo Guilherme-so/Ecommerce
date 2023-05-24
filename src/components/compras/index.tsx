@@ -29,7 +29,7 @@ export default function MinhasCompras() {
     fetchCompras();
   }, [email]);
 
-  console.log(compras)
+  console.log(compras);
 
   if (compras === null || compras.length === 0) {
     return (
@@ -61,13 +61,13 @@ export default function MinhasCompras() {
             <h5>{item.updatedAt.substring(0, 10)}</h5>
             <hr />
             <ComprasWrapper>
-              {item?.line_items.map((lineItem,index) => (
+              {item?.line_items.map((lineItem, index) => (
                 <ImageContainer key={index}>
                   <Image
                     src={lineItem.price_data.product_data.images[0]}
                     alt={lineItem.price_data.product_data.name}
-                    height={74}
-                    width={74}
+                    fill
+                    style={{objectFit:'contain'}}
                   />
                 </ImageContainer>
               ))}
@@ -78,20 +78,20 @@ export default function MinhasCompras() {
                   ) : (
                     <p style={{ color: "green" }}>Compra realizada</p>
                   )}
-                  {item?.line_items.map((lineItem,index) => (
+                  {item?.line_items.map((lineItem, index) => (
                     <div key={index}>
                       <p>{lineItem.price_data.product_data.name}</p>
                       <span>{lineItem.quantity} unidade</span>
                     </div>
                   ))}
                 </Info>
-                <Button
-                  btntype="primary"
-                  onClick={() => (window.location.href = "/")}
-                >
-                  Home
-                </Button>
               </DetailsWrapper>
+              <Button
+                btntype="primary"
+                onClick={() => (window.location.href = "/")}
+              >
+                Home
+              </Button>
             </ComprasWrapper>
           </CompraDetails>
         ))}

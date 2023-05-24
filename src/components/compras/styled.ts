@@ -8,7 +8,17 @@ export const Container = styled.div`
     opacity: 0.8;
     margin-bottom: 40px;
   }
+
+  @media screen and (max-width: 700px) {
+    margin: 10px;
+    margin-top: 94px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
 `;
+
 export const CompraDetails = styled.div`
   width: 100%;
   height: 200px;
@@ -26,7 +36,7 @@ export const CompraDetails = styled.div`
     opacity: 0.3;
   }
 
-  .empty{
+  .empty {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +46,17 @@ export const CompraDetails = styled.div`
 
     h1 {
       font-size: xx-large;
-      opacity: .8;
+      opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .empty {
+
+      h1 {
+        font-size: medium;
+        opacity: 0.8;
+      }
     }
   }
 `;
@@ -44,29 +64,47 @@ export const CompraDetails = styled.div`
 export const ComprasWrapper = styled.div`
   display: flex;
   padding: 20px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 50px;
+  }
+
+  @media screen and (max-width: 400px) {
+    button {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 170px;
+      height: 50px;
+    }
+  }
 `;
+
 export const ImageContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
   margin-right: 15px;
   border: 1px solid #dadada;
   border-radius: 5px;
   padding: 5px 10px;
+  width: 70px;
+  height: 70px;
 `;
 
 export const DetailsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
 
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 170px;
-  height: 50px;
-}
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const Info = styled.div`
@@ -81,5 +119,12 @@ export const Info = styled.div`
     justify-content: space-between;
     font-size: small;
     opacity: 0.7;
+
+    p {
+      max-width: 200px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 `;
