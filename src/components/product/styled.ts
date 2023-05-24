@@ -4,6 +4,11 @@ export const Container = styled.div`
   margin: 40px;
   margin-top: 114px;
   height: 80vh;
+
+  @media screen and (max-width: 700px) {
+    margin: 10px;
+    margin-top: 84px;
+  }
 `;
 
 export const Breadcrumbs = styled.div`
@@ -48,10 +53,20 @@ export const ProductContainer = styled.div`
   display: grid;
   grid-template-columns: 1.3fr 2fr;
   gap: 18px;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
 `;
+
 export const ImagesContainer = styled.div`
   display: flex;
   gap: 30px;
+
+  @media screen and (max-width: 700px) {
+    gap: 5px;
+  }
 `;
 
 export const ImageList = styled.div`
@@ -83,17 +98,24 @@ export const MainImage = styled.div`
   width: 100%;
   height: 100%;
   margin: 40px 0px;
+
+  @media screen and (max-width: 700px) {
+    margin: 40px 0px;
+  }
 `;
 
 export const InfoContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 309px;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const LeftSide = styled.div`
   padding: 40px 0px;
   position: relative;
-
 
   h1 {
     -webkit-flex: auto;
@@ -108,6 +130,10 @@ export const LeftSide = styled.div`
     font-size: 36px;
     font-weight: 100;
     opacity: 0.8;
+
+    @media screen and (max-width: 700px) {
+      font-size: 20px;
+    }
   }
 
   .desc {
@@ -128,11 +154,22 @@ export const LeftSide = styled.div`
       font-weight: 500;
       font-size: 18px;
     }
+
+    @media screen and (max-width: 700px) {
+      span {
+        font-size: 16px;
+      }
+    }
   }
 
   .properties {
     margin-top: 20px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 700px) {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   .property {
@@ -163,6 +200,23 @@ export const LeftSide = styled.div`
       cursor: pointer;
     }
   }
+
+  @media screen and (max-width: 700px) {
+    margin-bottom: 10px;
+
+    div {
+      align-items: center;
+      gap: 10px;
+      p {
+        font-size: medium;
+      }
+      span {
+        opacity: 1;
+        font-weight: 300;
+        font-size: 10px;
+      }
+    }
+  }
 `;
 
 export const Like = styled.div`
@@ -177,7 +231,10 @@ export const Like = styled.div`
   border-radius: 50%;
   cursor: pointer;
 
-
+  @media screen and (max-width: 700px) {
+    top: 36px;
+    right: 20px;
+  }
 `;
 
 export const RightSide = styled.div`
@@ -226,6 +283,30 @@ export const RightSide = styled.div`
       justify-content: center;
       height: 50px;
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    padding: 25px 15px;
+    height: 250px;
+
+    .top {
+      gap: 10px;
+
+      .quantidade {
+        gap: 10px;
+      }
+    }
+
+    .buttonsWrapper {
+      max-width: 250px;
+      width: 100%;
+
+      button {
+        height: 40px;
+        width: 100%;
+        padding: 5px 0px;
+      }
     }
   }
 `;

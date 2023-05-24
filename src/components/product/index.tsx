@@ -183,7 +183,6 @@ export default function ProductById({ product, category, parentCategory }) {
           </InfoContainer>
         </ProductContainer>
       </Container>
-      <Footer />
     </>
   );
 }
