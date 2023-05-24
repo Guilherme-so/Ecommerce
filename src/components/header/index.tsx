@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { removeToFavorites } from "@/redux/features/favorites/favoritesSlice";
 import Center from "../center";
-import { Handbag, MagnifyingGlass } from "phosphor-react";
+import { Handbag, List, MagnifyingGlass } from "phosphor-react";
 import ChevronRight from "../icons/chevronRight";
 import Button from "../buttons";
 import {
@@ -37,6 +37,8 @@ export default function Navbar() {
   const [categorias, setCategorias] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [isSearchOpen, setSearchopen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+
 
   const fetchFavorites = useCallback(async () => {
     const data = {
@@ -63,15 +65,21 @@ export default function Navbar() {
     fetchProdutos();
   }, []);
 
-  const searchItems = useCallback((title: string) => {
-    const regex = new RegExp(searchValue, "i");
-    return regex.test(title);
-  }, [searchValue]);
+  const searchItems = useCallback(
+    (title: string) => {
+      const regex = new RegExp(searchValue, "i");
+      return regex.test(title);
+    },
+    [searchValue]
+  );
 
   useEffect(() => {
     const novaLista = produtos.filter((item) => searchItems(item.title));
     setSearchList(novaLista);
-  }, [searchValue, produtos, searchItems]);
+    if (searchValue === "") {
+      setSearchList([]);
+    }
+  }, [searchValue, searchItems]);
 
   //onBlur styled components
   const searchRef = useRef<HTMLDivElement>();
@@ -138,6 +146,20 @@ export default function Navbar() {
             </div>
           </div>
           <div></div>
+          <div className="mobileIcons">
+            <List
+              onClick={(e) => {
+                setDropdown((prev) => !prev)
+                e.stopPropagation();
+              }}
+              className="list"
+              size={30}
+            />
+            <NavLink href="/cart" cartlength={cart.length > 9 ? true : false}>
+              <Handbag size={30} className="cart" color="#474637" />
+              <span className="count">{cart.length}</span>
+            </NavLink>
+          </div>
         </TopHeader>
 
         <Wrapper>
@@ -168,10 +190,10 @@ export default function Navbar() {
               )}
             </ButtonLink>
           </NavStyled>
-          <NavStyled>
+          <NavStyled dropdown={dropdown}>
             <NavLink href="/account">Account</NavLink>
             <NavLink href="/compras">Compras</NavLink>
-            <NavLink href="#" onMouseMove={() => setOpenFavoritos(true)}>
+            <NavLink className="fav" href="#" onMouseMove={() => setOpenFavoritos(true)}>
               Favoritos
               <span>
                 <ChevronRight />
@@ -239,7 +261,9 @@ export default function Navbar() {
                 </div>
               )}
             </NavLink>
-            <NavLink href="/cart" cartlength={cart.length > 9 ? true : false}>
+            <NavLink href="/cart"
+            className="cart"
+            cartlength={cart.length > 9 ? true : false}>
               <Handbag size={30} className="cart" color="#474637" />
               <span className="count">{cart.length}</span>
             </NavLink>

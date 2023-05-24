@@ -11,28 +11,42 @@ export const Container = styled.div`
 `;
 
 export const TopHeader = styled.div`
-  height: 50px;
-  margin-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  padding: 10px 0px;
+
+  .mobileIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-left: 5px;
+
+    .list {
+      translate: 0px -2px;
+    }
+
+    @media screen and (min-width: 700px) {
+      display: none;
+    }
+  }
 
   .search {
     display: flex;
     position: relative;
-    max-width: 500px;
+    max-width: 300px;
     width: 100%;
     height: 40px;
     align-items: center;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.06);
-    margin-right: 40px;
 
     input {
       border: none;
       width: 100%;
       height: 100%;
-      padding-left: 20px;
+      padding-left: 50px;
       font-size: medium;
       color: gray;
       border-radius: 5px;
@@ -40,23 +54,38 @@ export const TopHeader = styled.div`
       :focus {
         outline: 1px solid black;
       }
+
+      @media screen and (min-width: 700px) {
+        padding-left: 20px;
+      }
     }
 
     .icon {
       position: absolute;
       right: 20px;
       cursor: pointer;
+
+      @media screen and (max-width: 700px) {
+        position: absolute;
+        left: 10px;
+        cursor: pointer;
+      }
     }
 
-    ::after {
-      content: "";
-      display: inline-flex;
-      position: absolute;
-      right: 50px;
-      z-index: 999;
-      background-color: #dadada;
-      width: 1px;
-      height: 25px;
+    @media screen and (min-width: 700px) {
+      margin-right: 40px;
+      max-width: 500px;
+
+      ::after {
+        content: "";
+        display: inline-flex;
+        position: absolute;
+        right: 50px;
+        z-index: 999;
+        background-color: #dadada;
+        width: 1px;
+        height: 25px;
+      }
     }
 
     .result {
@@ -113,35 +142,70 @@ export const TopHeader = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 5px;
-`;
-
 export const Logo = styled(Link)`
   color: #474637;
   text-decoration: none;
   font-size: large;
   font-weight: 600;
+
+  @media screen and (max-width: 700px) {
+    font-size: small;
+    margin-right: 5px;  
+  }
 `;
 
-export const NavStyled = styled.nav`
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+
+  @media screen and (min-width: 700px) {
+    height: 40px;
+  }
+`;
+
+export const NavStyled = styled.nav<{dropdown?:boolean}>`
   display: flex;
   gap: 10px;
   align-items: center;
+
+  @media screen and (max-width: 700px) {
+    display: ${({dropdown}) => dropdown ? "flex" : "none"};
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    top: 72px;
+    background-color: #fff159;
+    max-width: 200px;
+    width: 100%;
+    height: 100px;
+    right: 0;
+    padding: 20px;
+    border-radius: 5px;
+
+    .fav {
+      display: none;
+    }
+    .cart {
+      display: none;
+    }
+  }
 `;
 
 export const ButtonLink = styled.div<{ cartlength?: boolean }>`
-  position: relative;
   text-decoration: none;
   color: #474637;
   position: relative;
   font-size: 14px;
   font-weight: 300;
   line-height: 18px;
+  display: none;
+
+  @media screen and (min-width: 700px) {
+    display: flex;
+  }
 
   span {
     svg {
@@ -176,12 +240,11 @@ export const ButtonLink = styled.div<{ cartlength?: boolean }>`
       cursor: pointer;
 
       :hover {
-        background-color: #3983F5;
+        background-color: #3983f5;
       }
     }
   }
-
-`
+`;
 
 export const NavLink = styled(Link)<{ cartlength?: boolean }>`
   position: relative;
