@@ -105,17 +105,18 @@ export const Title = styled.p`
 `;
 
 export const Like = styled.div`
-  display: none;
+  display: flex;
   background-color: rgba(255, 255, 255, 0.7);
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   align-items: center;
   justify-content: center;
   display: flex;
   padding: 8px 6px 4px 6px;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 1;
 
   svg {
     display: none;
